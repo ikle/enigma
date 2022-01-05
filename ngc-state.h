@@ -41,4 +41,9 @@ static inline int ngc_is_comp_mode (struct ngc_state *o)
 	return o->var[NGC_COMP] != 0;
 }
 
+static inline double ngc_word (struct ngc_state *o, int c)
+{
+	return o->word[c - 'A'];
+}
+
 #endif  /* NGC_STATE_H */

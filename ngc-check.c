@@ -122,7 +122,7 @@ static int ngc_g0030_check (struct ngc_state *o)
 
 static int ngc_delay_check (struct ngc_state *o, const char *cmd)
 {
-	double period = o->word['P' - 'A'];
+	double period = ngc_word (o, 'P');
 
 	if (period < 0.0)
 		return ngc_error (o, "Negative period for %s", cmd);
@@ -156,7 +156,7 @@ static int ngc_int_check (struct ngc_state *o, char word, long lo, long hi,
 
 static int ngc_g0100_check (struct ngc_state *o)
 {
-	int L = o->word['L' - 'A'];
+	int L = ngc_word (o, 'L');
 
 	if (!ngc_int_check (o, 'L', 0, 1000, "Subcommand"))
 		return 0;
@@ -376,7 +376,7 @@ static int ngc_canned_check (struct ngc_state *o, const char *cmd)
 		if ((o->map & NGC_Z) == 0 && o->G[1] != o->prev->G[1])
 			return ngc_error (o, "No Z word for first %s", cmd);
 
-		if (o->word['R' - 'A'] < o->word['Z' - 'A'])
+		if (ngc_word (o, 'R') < ngc_word (o, 'Z'))
 			return ngc_error (o, "R < Z for canned cycle in XY "
 					     "plane for %s", cmd);
 		break;
@@ -384,7 +384,7 @@ static int ngc_canned_check (struct ngc_state *o, const char *cmd)
 		if ((o->map & NGC_Y) == 0 && o->G[1] != o->prev->G[1])
 			return ngc_error (o, "No Y word for first %s", cmd);
 
-		if (o->word['R' - 'A'] < o->word['Y' - 'A'])
+		if (ngc_word (o, 'R') < ngc_word (o, 'Y'))
 			return ngc_error (o, "R < Y for canned cycle in XZ "
 					     "plane for %s", cmd);
 		break;
@@ -392,7 +392,7 @@ static int ngc_canned_check (struct ngc_state *o, const char *cmd)
 		if ((o->map & NGC_X) == 0 && o->G[1] != o->prev->G[1])
 			return ngc_error (o, "No X word for first %s", cmd);
 
-		if (o->word['R' - 'A'] < o->word['X' - 'A'])
+		if (ngc_word (o, 'R') < ngc_word (o, 'X'))
 			return ngc_error (o, "R < X for canned cycle in YZ "
 					     "plane for %s", cmd);
 		break;
