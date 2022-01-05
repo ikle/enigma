@@ -17,6 +17,7 @@
 struct ngc_state {
 	struct ngc_state *prev;
 	double *var;
+	const char *comment;
 
 	int G[NGC_GGSIZE];
 	int M[NGC_MGSIZE];
