@@ -27,12 +27,12 @@ enum ngc_var {
 	NGC_HOME_B	= 5165,	/* G28 B			*/
 	NGC_HOME_C	= 5166,	/* G28 C			*/
 
-	NGC_ALT_HOME_X	= 5181,	/* G30 X			*/
-	NGC_ALT_HOME_Y	= 5182,	/* G30 Y			*/
-	NGC_ALT_HOME_Z	= 5183,	/* G30 Z			*/
-	NGC_ALT_HOME_A	= 5184,	/* G30 A			*/
-	NGC_ALT_HOME_B	= 5185,	/* G30 B			*/
-	NGC_ALT_HOME_C	= 5186,	/* G30 C			*/
+	NGC_WORK_X	= 5181,	/* G30 X			*/
+	NGC_WORK_Y	= 5182,	/* G30 Y			*/
+	NGC_WORK_Z	= 5183,	/* G30 Z			*/
+	NGC_WORK_A	= 5184,	/* G30 A			*/
+	NGC_WORK_B	= 5185,	/* G30 B			*/
+	NGC_WORK_C	= 5186,	/* G30 C			*/
 
 	NGC_OFFSET_ON	= 5210,	/* G92 offset enabled		*/
 	NGC_OFFSET_X	= 5211,	/* G92 X offset			*/
