@@ -11,12 +11,12 @@
 #define NGC_VARS_H  1
 
 enum ngc_var {
-	NGC_PROBE_X	= 5061,	/* G38.2 X			*/
-	NGC_PROBE_Y	= 5062,	/* G38.2 Y			*/
-	NGC_PROBE_Z	= 5063,	/* G38.2 Z			*/
-	NGC_PROBE_A	= 5064,	/* G38.2 A			*/
-	NGC_PROBE_B	= 5065,	/* G38.2 B			*/
-	NGC_PROBE_C	= 5066,	/* G38.2 C			*/
+	NGC_PROBE_X	= 5061,	/* G38 X			*/
+	NGC_PROBE_Y	= 5062,	/* G38 Y			*/
+	NGC_PROBE_Z	= 5063,	/* G38 Z			*/
+	NGC_PROBE_A	= 5064,	/* G38 A			*/
+	NGC_PROBE_B	= 5065,	/* G38 B			*/
+	NGC_PROBE_C	= 5066,	/* G38 C			*/
 
 	NGC_PROBE_OK	= 5070,	/* G38 Probe result	(EMC2)	*/
 
