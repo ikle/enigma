@@ -161,6 +161,10 @@ static int ngc_g0100_check (struct ngc_state *o)
 	if (!ngc_int_check (o, 'L', 0, 1000, "Subcommand"))
 		return 0;
 
+	if (o->G[1] != 0)
+		return ngc_error (o, "G10 cannot be used with any motion "
+				     "command");
+
 	switch (L) {
 	case 2:
 		return ngc_int_check (o, 'P', 1, 9, "Coordinate system number");
@@ -196,12 +200,20 @@ static int ngc_g0210_check (struct ngc_state *o)
 
 static int ngc_g0280_check (struct ngc_state *o)
 {
-	return 1;  /* No conditions to return to home */
+	if (o->G[1] != 0)
+		return ngc_error (o, "G28 cannot be used with any motion "
+				     "command");
+
+	return 1;
 }
 
 static int ngc_g0300_check (struct ngc_state *o)
 {
-	return 1;  /* No conditions to return to secondary home */
+	if (o->G[1] != 0)
+		return ngc_error (o, "G30 cannot be used with any motion "
+				     "command");
+
+	return 1;
 }
 
 static int ngc_g0382_check (struct ngc_state *o)
@@ -472,6 +484,10 @@ static int ngc_g0910_check (struct ngc_state *o)
 
 static int ngc_g0920_check (struct ngc_state *o)
 {
+	if (o->G[1] != 0)
+		return ngc_error (o, "G92 cannot be used with any motion "
+				     "command");
+
 	return ngc_motion_check (o, "G92");
 }
 
