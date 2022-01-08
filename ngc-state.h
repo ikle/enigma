@@ -26,6 +26,7 @@ struct ngc_state {
 };
 
 int ngc_error (struct ngc_state *o, const char *fmt, ...);
+int ngc_warn  (struct ngc_state *o, const char *fmt, ...);
 int ngc_check (struct ngc_state *o);
 int ngc_exec  (struct ngc_state *o);
 

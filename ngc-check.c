@@ -29,7 +29,7 @@ static int ngc_is_int (double x)
 static int ngc_motion_check (struct ngc_state *o, const char *cmd)
 {
 	if ((o->map & NGC_AXIS) == 0)
-		return ngc_error (o, "No axis word for %s", cmd);
+		return ngc_warn (o, "No axis word for %s", cmd);
 
 	return 1;
 }
