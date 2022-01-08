@@ -283,9 +283,6 @@ static int ngc_g0490_check (struct ngc_state *o)
 
 static int ngc_g0530_check (struct ngc_state *o)
 {
-	if (!ngc_motion_check (o, "G53"))
-		return 0;
-
 	if (o->G[1] != NGC_G0000 && o->G[1] != NGC_G0010)
 		return ngc_error (o, "G53 is used without G0 or G1 being "
 				     "active");
