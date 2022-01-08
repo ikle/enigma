@@ -439,7 +439,8 @@ static int ngc_g0850_check (struct ngc_state *o)
 
 static int ngc_g0860_check (struct ngc_state *o)
 {
-	return ngc_canned_check (o, "G86");
+	return ngc_delay_check  (o, "G86") &&
+	       ngc_canned_check (o, "G86");
 }
 
 static int ngc_g0870_check (struct ngc_state *o)
@@ -455,7 +456,8 @@ static int ngc_g0880_check (struct ngc_state *o)
 
 static int ngc_g0890_check (struct ngc_state *o)
 {
-	return ngc_canned_check (o, "G89");
+	return ngc_delay_check  (o, "G89") &&
+	       ngc_canned_check (o, "G89");
 }
 
 static int ngc_g0900_check (struct ngc_state *o)
