@@ -366,7 +366,7 @@ static int ngc_g0800_check (struct ngc_state *o)
 		      o->G[0] == NGC_G0300 || o->G[0] == NGC_G0920;
 
 	if (!g0_axis && (o->map & NGC_AXIS) != 0)
-		return ngc_error (o, "Useless axis word specified for G80");
+		return ngc_warn (o, "Useless axis word specified for G80");
 
 	return 1;
 }
