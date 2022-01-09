@@ -29,7 +29,7 @@ static int ngc_is_int (double x)
 static int ngc_motion_check (struct ngc_state *o, const char *cmd)
 {
 	if ((o->map & NGC_AXIS) == 0)
-		return ngc_warn (o, "No axis word for %s", cmd);
+		ngc_warn (o, "No axis word for %s", cmd);
 
 	return 1;
 }
@@ -366,7 +366,7 @@ static int ngc_g0800_check (struct ngc_state *o)
 		      o->G[0] == NGC_G0300 || o->G[0] == NGC_G0920;
 
 	if (!g0_axis && (o->map & NGC_AXIS) != 0)
-		return ngc_warn (o, "Useless axis word specified for G80");
+		ngc_warn (o, "Useless axis word specified for G80");
 
 	return 1;
 }
