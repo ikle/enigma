@@ -10,9 +10,12 @@
 #ifndef NGC_STATE_H
 #define NGC_STATE_H  1
 
+#include <stddef.h>
+
 #include "ngc-gcode.h"
 #include "ngc-mcode.h"
 #include "ngc-vars.h"
+#include "ngc-word.h"
 
 struct ngc_state {
 	struct ngc_state *prev;

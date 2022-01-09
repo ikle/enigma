@@ -11,8 +11,6 @@
 #include <math.h>
 
 #include "ngc-state.h"
-#include "ngc-vars.h"
-#include "ngc-word.h"
 
 static int ngc_eq (double a, double b, double precision)
 {
