@@ -26,7 +26,7 @@ void ngc_device_free (struct ngc_device *o);
 enum ngc_conf {
 	NGC_CONF_UNITS,
 	NGC_CONF_PLANE,
-	NGC_CONF_MODE,		/* Feed mode				*/
+	NGC_CONF_PATH,		/* Path control mode			*/
 	NGC_CONF_CUTTER,	/* Cutter position			*/
 };
 
@@ -41,10 +41,10 @@ enum ngc_plane {
 	NGC_PLANE_YZ,
 };
 
-enum ngc_mode {
-	NGC_MODE_EXACT_PATH = 0,
-	NGC_MODE_EXACT_STOP,
-	NGC_MODE_CONTINUOUS,
+enum ngc_path {
+	NGC_PATH_EXACT = 0,	/* Exact path mode		*/
+	NGC_PATH_STOP,		/* Exact stop mode		*/
+	NGC_PATH_CONT,		/* Continuous path mode		*/
 };
 
 enum ngc_cutter {

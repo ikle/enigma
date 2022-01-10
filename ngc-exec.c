@@ -270,13 +270,13 @@ static int ngc_exec_set_path_mode (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G13]) {
 	case NGC_G0610:
-		return ngc_device_conf (dev, NGC_CONF_MODE, NGC_MODE_EXACT_PATH);
+		return ngc_device_conf (dev, NGC_CONF_PATH, NGC_PATH_EXACT);
 
 	case NGC_G0611:
-		return ngc_device_conf (dev, NGC_CONF_MODE, NGC_MODE_EXACT_STOP);
+		return ngc_device_conf (dev, NGC_CONF_PATH, NGC_PATH_STOP);
 
 	case NGC_G0640:
-		return ngc_device_conf (dev, NGC_CONF_MODE, NGC_MODE_CONTINUOUS);
+		return ngc_device_conf (dev, NGC_CONF_PATH, NGC_PATH_CONT);
 	}
 
 	return 1;
