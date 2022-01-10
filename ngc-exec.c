@@ -223,10 +223,10 @@ static int ngc_exec_conf_cutter_length_comp (struct ngc_state *o, struct ngc_dev
 
 	switch (o->G[NGC_G8]) {
 	case NGC_G0430:
-		return ngc_device_tool_offset (dev, slot);
+		return ngc_device_mode (dev, NGC_MODE_TOOL, slot);
 
 	case NGC_G0490:
-		return ngc_device_tool_offset (dev, 0);
+		return ngc_device_mode (dev, NGC_MODE_TOOL, 0);
 	}
 
 	return 1;
