@@ -91,15 +91,17 @@ static int ngc_exec_change_tool (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_conf_spindle (struct ngc_state *o, struct ngc_device *dev)
 {
+	double speed = ngc_word (o, 'S');
+
 	switch (o->M[NGC_M7]) {
 	case NGC_M0030:
-		return ngc_device_mode (dev, NGC_MODE_SPINDLE, NGC_DIR_CW);
+		return ngc_device_spindle (dev, NGC_SPINDLE_CW, speed);
 
 	case NGC_M0040:
-		return ngc_device_mode (dev, NGC_MODE_SPINDLE, NGC_DIR_CCW);
+		return ngc_device_spindle (dev, NGC_SPINDLE_CCW, speed);
 
 	case NGC_M0050:
-		return ngc_device_mode (dev, NGC_MODE_SPINDLE, NGC_DIR_STOPPED);
+		return ngc_device_spindle (dev, NGC_SPINDLE_STOP, 0);
 	}
 
 	return 1;

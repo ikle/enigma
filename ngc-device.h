@@ -26,7 +26,6 @@ int ngc_device_reset	(struct ngc_device *o);
 /*
  * 4.3.3  Representation
  * 4.3.5  Machining Attributes
- * 4.3.7  Spindle Functions
  * 4.3.11 Cutter Radius Compensation
  */
 
@@ -35,7 +34,6 @@ enum ngc_mode {
 	NGC_MODE_PLANE,
 	NGC_MODE_PATH,		/* Path control mode			*/
 	NGC_MODE_RATE,		/* Feed rate mode			*/
-	NGC_MODE_SPINDLE,	/* Spindle rotation mode		*/
 	NGC_MODE_CUTTER,	/* Cutter position			*/
 	NGC_MODE_CUTTER_NO,	/* Cutter number for compensation	*/
 };
@@ -60,12 +58,6 @@ enum ngc_path {
 enum ngc_rate {
 	NGC_RATE_UPM,		/* Units per minute			*/
 	NGC_RATE_CPM,		/* Commands per minute (inverse time)	*/
-};
-
-enum ngc_dir {
-	NGC_DIR_STOPPED = 0,	/* Spindle stopped			*/
-	NGC_DIR_CW,		/* Clockwise direction			*/
-	NGC_DIR_CCW,		/* Counterclockwise direction 		*/
 };
 
 enum ngc_cutter {
@@ -108,7 +100,14 @@ int ngc_device_stop	(struct ngc_device *o, int opt);
  * 4.3.7 Spindle Functions
  */
 
-//int ngc_device_spindle_orient	(struct ngc_device *o, double angle);
+enum ngc_spindle {
+	NGC_SPINDLE_STOP,	/* Stop spindle				*/
+	NGC_SPINDLE_CW,		/* Run spindle clockwise		*/
+	NGC_SPINDLE_CCW,	/* Run spindle counterclockwise		*/
+	NGC_SPINDLE_ORIENT,	/* Orient spindle			*/
+};
+
+int ngc_device_spindle	(struct ngc_device *o, int op, double arg);
 
 /*
  * 4.3.8 Tool Functions
