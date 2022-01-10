@@ -20,12 +20,14 @@ void ngc_device_free (struct ngc_device *o);
 /*
  * 4.3.3 Representation
  * 4.3.5 Machining Attributes
+ * 4.3.11 Cutter Radius Compensation
  */
 
 enum ngc_conf {
 	NGC_CONF_UNITS,
 	NGC_CONF_PLANE,
-	NGC_CONF_MODE,		/* Feed mode	*/
+	NGC_CONF_MODE,		/* Feed mode				*/
+	NGC_CONF_CUTTER,	/* Cutter position			*/
 };
 
 enum ngc_units {
@@ -43,6 +45,12 @@ enum ngc_mode {
 	NGC_MODE_EXACT_PATH = 0,
 	NGC_MODE_EXACT_STOP,
 	NGC_MODE_CONTINUOUS,
+};
+
+enum ngc_cutter {
+	NGC_CUTTER_C,		/* Cutter at center, no compensation	*/
+	NGC_CUTTER_L,
+	NGC_CUTTER_R,
 };
 
 int ngc_device_conf		(struct ngc_device *o, int opt, int value);
@@ -137,12 +145,6 @@ int ngc_device_reset	(struct ngc_device *o);
  * 4.3.11 Cutter Radius Compensation
  */
 
-enum ngc_cutter {
-	NGC_CUTTER_CENTER,
-	NGC_CUTTER_LEFT,
-	NGC_CUTTER_RIGHT,
-};
-
-int ngc_device_cutter_comp	(struct ngc_device *o, int pos, double r);
+int ngc_device_cutter_comp	(struct ngc_device *o, double r);
 
 #endif  /* NGC_DEVICE_H */

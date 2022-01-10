@@ -192,14 +192,15 @@ ngc_exec_conf_cutter_radius_comp (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G7]) {
 	case NGC_G0400:
-		return ngc_device_cutter_comp (dev, NGC_CUTTER_CENTER, 0);
+		return ngc_device_conf (dev, NGC_CONF_CUTTER, NGC_CUTTER_C);
 
 	case NGC_G0410:
-		return ngc_device_cutter_comp (dev, NGC_CUTTER_LEFT,
-					       ngc_word (o, 'D'));
+		return ngc_device_conf (dev, NGC_CONF_CUTTER, NGC_CUTTER_L) &&
+		       ngc_device_cutter_comp (dev, ngc_word (o, 'D'));
+
 	case NGC_G0420:
-		return ngc_device_cutter_comp (dev, NGC_CUTTER_RIGHT,
-					       ngc_word (o, 'D'));
+		return ngc_device_conf (dev, NGC_CONF_CUTTER, NGC_CUTTER_R) &&
+		       ngc_device_cutter_comp (dev, ngc_word (o, 'D'));
 	}
 
 	return 1;
