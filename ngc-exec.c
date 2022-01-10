@@ -190,17 +190,25 @@ static int ngc_exec_set_units (struct ngc_state *o, struct ngc_device *dev)
 static int
 ngc_exec_conf_cutter_radius_comp (struct ngc_state *o, struct ngc_device *dev)
 {
+	int i = ngc_word (o, 'D');
+
+	switch (o->G[NGC_G7]) {
+	case NGC_G0410:
+	case NGC_G0420:
+		if ((o->map & NGC_D) != 0 &&
+		    !ngc_device_mode (dev, NGC_MODE_CUTTER_NO, i))
+			return 0;
+	}
+
 	switch (o->G[NGC_G7]) {
 	case NGC_G0400:
 		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_C);
 
 	case NGC_G0410:
-		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_L) &&
-		       ngc_device_cutter_comp (dev, ngc_word (o, 'D'));
+		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_L);
 
 	case NGC_G0420:
-		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_R) &&
-		       ngc_device_cutter_comp (dev, ngc_word (o, 'D'));
+		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_R);
 	}
 
 	return 1;

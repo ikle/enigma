@@ -29,6 +29,7 @@ enum ngc_mode {
 	NGC_MODE_PATH,		/* Path control mode			*/
 	NGC_MODE_RATE,		/* Feed rate mode			*/
 	NGC_MODE_CUTTER,	/* Cutter position			*/
+	NGC_MODE_CUTTER_NO,	/* Cutter number for compensation	*/
 };
 
 enum ngc_units {
@@ -145,11 +146,5 @@ int ngc_device_pallet_shuttle	(struct ngc_device *o);
  */
 
 int ngc_device_reset	(struct ngc_device *o);
-
-/*
- * 4.3.11 Cutter Radius Compensation
- */
-
-int ngc_device_cutter_comp	(struct ngc_device *o, double r);
 
 #endif  /* NGC_DEVICE_H */
