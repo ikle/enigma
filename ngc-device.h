@@ -18,6 +18,12 @@ struct ngc_device *ngc_device_alloc (const char *name);
 void ngc_device_free (struct ngc_device *o);
 
 /*
+ * 4.3.10 Program Functions
+ */
+
+int ngc_device_reset	(struct ngc_device *o);
+
+/*
  * 4.3.3  Representation
  * 4.3.5  Machining Attributes
  * 4.3.11 Cutter Radius Compensation
@@ -140,11 +146,5 @@ int ngc_device_opt		(struct ngc_device *o, int mask, int on);
 int ngc_device_coolant		(struct ngc_device *o, int mask, int on);
 
 int ngc_device_pallet_shuttle	(struct ngc_device *o);
-
-/*
- * 4.3.10 Program Functions
- */
-
-int ngc_device_reset	(struct ngc_device *o);
 
 #endif  /* NGC_DEVICE_H */
