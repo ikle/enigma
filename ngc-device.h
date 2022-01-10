@@ -18,8 +18,8 @@ struct ngc_device *ngc_device_alloc (const char *name);
 void ngc_device_free (struct ngc_device *o);
 
 /*
- * 4.3.3 Representation
- * 4.3.5 Machining Attributes
+ * 4.3.3  Representation
+ * 4.3.5  Machining Attributes
  * 4.3.11 Cutter Radius Compensation
  */
 
@@ -53,16 +53,16 @@ enum ngc_cutter {
 	NGC_CUTTER_R,
 };
 
-int ngc_device_conf		(struct ngc_device *o, int opt, int value);
-int ngc_device_offset		(struct ngc_device *o, double *vec);
+int ngc_device_conf	(struct ngc_device *o, int opt, int value);
+int ngc_device_offset	(struct ngc_device *o, double *vec);
 
 /*
  * 4.3.4 Free Space Motion
  */
 
 //int ngc_device_traverse_rate	(struct ngc_device *o, double rate);
-int ngc_device_home		(struct ngc_device *o);
-int ngc_device_move		(struct ngc_device *o, int abs, double *end);
+int ngc_device_home	(struct ngc_device *o);
+int ngc_device_move	(struct ngc_device *o, int abs, double *end);
 
 /*
  * 4.3.5 Machining Attributes
