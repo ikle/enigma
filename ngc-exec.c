@@ -64,7 +64,7 @@ static
 int ngc_exec_set_spindle_speed (struct ngc_state *o, struct ngc_device *dev)
 {
 	if ((o->map & NGC_S) != 0)
-		return ngc_device_spindle_speed (dev, ngc_word (o, 'S'));
+		return ngc_device_conf (dev, NGC_CONF_SPEED, ngc_word (o, 'S'));
 
 	return 1;
 }
@@ -88,13 +88,13 @@ static int ngc_exec_conf_spindle (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->M[NGC_M7]) {
 	case NGC_M0030:
-		return ngc_device_spindle_run (dev, NGC_DIR_CW);
+		return ngc_device_mode (dev, NGC_MODE_SPINDLE, NGC_DIR_CW);
 
 	case NGC_M0040:
-		return ngc_device_spindle_run (dev, NGC_DIR_CCW);
+		return ngc_device_mode (dev, NGC_MODE_SPINDLE, NGC_DIR_CCW);
 
 	case NGC_M0050:
-		return ngc_device_spindle_run (dev, NGC_DIR_STOPPED);
+		return ngc_device_mode (dev, NGC_MODE_SPINDLE, NGC_DIR_STOPPED);
 	}
 
 	return 1;

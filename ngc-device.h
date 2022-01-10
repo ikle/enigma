@@ -26,6 +26,7 @@ int ngc_device_reset	(struct ngc_device *o);
 /*
  * 4.3.3  Representation
  * 4.3.5  Machining Attributes
+ * 4.3.7  Spindle Functions
  * 4.3.11 Cutter Radius Compensation
  */
 
@@ -34,6 +35,7 @@ enum ngc_mode {
 	NGC_MODE_PLANE,
 	NGC_MODE_PATH,		/* Path control mode			*/
 	NGC_MODE_RATE,		/* Feed rate mode			*/
+	NGC_MODE_SPINDLE,	/* Spindle rotation mode		*/
 	NGC_MODE_CUTTER,	/* Cutter position			*/
 	NGC_MODE_CUTTER_NO,	/* Cutter number for compensation	*/
 };
@@ -60,6 +62,12 @@ enum ngc_rate {
 	NGC_RATE_CPM,		/* Commands per minute (inverse time)	*/
 };
 
+enum ngc_dir {
+	NGC_DIR_STOPPED = 0,	/* Spindle stopped			*/
+	NGC_DIR_CW,		/* Clockwise direction			*/
+	NGC_DIR_CCW,		/* Counterclockwise direction 		*/
+};
+
 enum ngc_cutter {
 	NGC_CUTTER_C,		/* Cutter at center, no compensation	*/
 	NGC_CUTTER_L,
@@ -68,6 +76,7 @@ enum ngc_cutter {
 
 enum ngc_conf {
 	NGC_CONF_RATE,
+	NGC_CONF_SPEED,
 };
 
 int ngc_device_mode	(struct ngc_device *o, int opt, int value);
@@ -97,19 +106,10 @@ int ngc_device_stop	(struct ngc_device *o, int opt);
  * 4.3.7 Spindle Functions
  */
 
-enum ngc_dir {
-	NGC_DIR_STOPPED = 0,	/* Spindle stopped		*/
-	NGC_DIR_CW,		/* Clockwise direction		*/
-	NGC_DIR_CCW,		/* Counterclockwise direction 	*/
-};
-
 enum ngc_limit {
 	NGC_LIMIT_FORCE = 0,
 	NGC_LIMIT_TORQUE,
 };
-
-int ngc_device_spindle_speed	(struct ngc_device *o, double speed);
-int ngc_device_spindle_run	(struct ngc_device *o, int dir);
 
 //int ngc_device_spindle_limit	(struct ngc_device *o, double limit, int type);
 //int ngc_device_spindle_orient	(struct ngc_device *o, double angle);
