@@ -23,11 +23,11 @@ void ngc_device_free (struct ngc_device *o);
  * 4.3.11 Cutter Radius Compensation
  */
 
-enum ngc_conf {
-	NGC_CONF_UNITS,
-	NGC_CONF_PLANE,
-	NGC_CONF_PATH,		/* Path control mode			*/
-	NGC_CONF_CUTTER,	/* Cutter position			*/
+enum ngc_mode {
+	NGC_MODE_UNITS,
+	NGC_MODE_PLANE,
+	NGC_MODE_PATH,		/* Path control mode			*/
+	NGC_MODE_CUTTER,	/* Cutter position			*/
 };
 
 enum ngc_units {
@@ -53,7 +53,7 @@ enum ngc_cutter {
 	NGC_CUTTER_R,
 };
 
-int ngc_device_conf	(struct ngc_device *o, int opt, int value);
+int ngc_device_mode	(struct ngc_device *o, int opt, int value);
 int ngc_device_offset	(struct ngc_device *o, double *vec);
 
 /*

@@ -156,13 +156,13 @@ int ngc_exec_set_active_plane (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G2]) {
 	case NGC_G0170:
-		return ngc_device_conf (dev, NGC_CONF_PLANE, NGC_PLANE_XY);
+		return ngc_device_mode (dev, NGC_MODE_PLANE, NGC_PLANE_XY);
 
 	case NGC_G0180:
-		return ngc_device_conf (dev, NGC_CONF_PLANE, NGC_PLANE_XZ);
+		return ngc_device_mode (dev, NGC_MODE_PLANE, NGC_PLANE_XZ);
 
 	case NGC_G0190:
-		return ngc_device_conf (dev, NGC_CONF_PLANE, NGC_PLANE_YZ);
+		return ngc_device_mode (dev, NGC_MODE_PLANE, NGC_PLANE_YZ);
 	}
 
 	return 1;
@@ -175,10 +175,10 @@ static int ngc_exec_set_units (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G6]) {
 	case NGC_G0200:
-		return ngc_device_conf (dev, NGC_CONF_UNITS, NGC_UNITS_INCHES);
+		return ngc_device_mode (dev, NGC_MODE_UNITS, NGC_UNITS_INCHES);
 
 	case NGC_G0210:
-		return ngc_device_conf (dev, NGC_CONF_UNITS, NGC_UNITS_MM);
+		return ngc_device_mode (dev, NGC_MODE_UNITS, NGC_UNITS_MM);
 	}
 
 	return 1;
@@ -192,14 +192,14 @@ ngc_exec_conf_cutter_radius_comp (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G7]) {
 	case NGC_G0400:
-		return ngc_device_conf (dev, NGC_CONF_CUTTER, NGC_CUTTER_C);
+		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_C);
 
 	case NGC_G0410:
-		return ngc_device_conf (dev, NGC_CONF_CUTTER, NGC_CUTTER_L) &&
+		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_L) &&
 		       ngc_device_cutter_comp (dev, ngc_word (o, 'D'));
 
 	case NGC_G0420:
-		return ngc_device_conf (dev, NGC_CONF_CUTTER, NGC_CUTTER_R) &&
+		return ngc_device_mode (dev, NGC_MODE_CUTTER, NGC_CUTTER_R) &&
 		       ngc_device_cutter_comp (dev, ngc_word (o, 'D'));
 	}
 
@@ -270,13 +270,13 @@ static int ngc_exec_set_path_mode (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G13]) {
 	case NGC_G0610:
-		return ngc_device_conf (dev, NGC_CONF_PATH, NGC_PATH_EXACT);
+		return ngc_device_mode (dev, NGC_MODE_PATH, NGC_PATH_EXACT);
 
 	case NGC_G0611:
-		return ngc_device_conf (dev, NGC_CONF_PATH, NGC_PATH_STOP);
+		return ngc_device_mode (dev, NGC_MODE_PATH, NGC_PATH_STOP);
 
 	case NGC_G0640:
-		return ngc_device_conf (dev, NGC_CONF_PATH, NGC_PATH_CONT);
+		return ngc_device_mode (dev, NGC_MODE_PATH, NGC_PATH_CONT);
 	}
 
 	return 1;
