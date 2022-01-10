@@ -99,7 +99,7 @@ int ngc_device_spindle_run	(struct ngc_device *o, int dir);
  */
 
 int ngc_device_tool_change	(struct ngc_device *o, int slot);
-int ngc_device_tool_offset	(struct ngc_device *o, double tool);
+int ngc_device_tool_offset	(struct ngc_device *o, int slot);
 
 /*
  * 4.3.9 Miscellaneous Functions
