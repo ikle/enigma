@@ -219,9 +219,11 @@ ngc_exec_conf_cutter_radius_comp (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_conf_cutter_length_comp (struct ngc_state *o, struct ngc_device *dev)
 {
+	int slot = (o->map & NGC_H) != 0 ? ngc_word (o, 'H') : 0;
+
 	switch (o->G[NGC_G8]) {
 	case NGC_G0430:
-		return ngc_device_tool_offset (dev, ngc_word (o, 'H'));
+		return ngc_device_tool_offset (dev, slot);
 
 	case NGC_G0490:
 		return ngc_device_tool_offset (dev, 0);
