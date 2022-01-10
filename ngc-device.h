@@ -27,6 +27,7 @@ enum ngc_mode {
 	NGC_MODE_UNITS,
 	NGC_MODE_PLANE,
 	NGC_MODE_PATH,		/* Path control mode			*/
+	NGC_MODE_RATE,		/* Feed rate mode			*/
 	NGC_MODE_CUTTER,	/* Cutter position			*/
 };
 
@@ -47,13 +48,23 @@ enum ngc_path {
 	NGC_PATH_CONT,		/* Continuous path mode		*/
 };
 
+enum ngc_rate {
+	NGC_RATE_UPM,		/* Units per minute			*/
+	NGC_RATE_CPM,		/* Commands per minute (inverse time)	*/
+};
+
 enum ngc_cutter {
 	NGC_CUTTER_C,		/* Cutter at center, no compensation	*/
 	NGC_CUTTER_L,
 	NGC_CUTTER_R,
 };
 
+enum ngc_conf {
+	NGC_CONF_RATE,
+};
+
 int ngc_device_mode	(struct ngc_device *o, int opt, int value);
+int ngc_device_conf	(struct ngc_device *o, int opt, double value);
 int ngc_device_offset	(struct ngc_device *o, double *vec);
 
 /*
@@ -63,12 +74,6 @@ int ngc_device_offset	(struct ngc_device *o, double *vec);
 //int ngc_device_traverse_rate	(struct ngc_device *o, double rate);
 int ngc_device_home	(struct ngc_device *o);
 int ngc_device_move	(struct ngc_device *o, int abs, double *end);
-
-/*
- * 4.3.5 Machining Attributes
- */
-
-int ngc_device_feed_rate	(struct ngc_device *o, double rate, int inv);
 
 /*
  * 4.3.6 Machining Functions

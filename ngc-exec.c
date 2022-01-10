@@ -36,11 +36,11 @@ int ngc_exec_set_feed_rate_mode (struct ngc_state *o, struct ngc_device *dev)
 	switch (o->G[NGC_G5]) {
 	case NGC_G0930:
 		o->var[NGC_INV] = 1;
-		break;
+		return ngc_device_mode (dev, NGC_MODE_RATE, NGC_RATE_CPM);
 
 	case NGC_G0940:
 		o->var[NGC_INV] = 0;
-		break;
+		return ngc_device_mode (dev, NGC_MODE_RATE, NGC_RATE_UPM);
 	}
 
 	return 1;
@@ -52,8 +52,8 @@ int ngc_exec_set_feed_rate_mode (struct ngc_state *o, struct ngc_device *dev)
 static int ngc_exec_set_feed_rate (struct ngc_state *o, struct ngc_device *dev)
 {
 	if ((o->map & NGC_F) != 0)
-		return ngc_device_feed_rate (dev, ngc_word (o, 'F'),
-					     o->var[NGC_INV]);
+		return ngc_device_conf (dev, NGC_CONF_RATE, ngc_word (o, 'F'));
+
 	return 1;
 }
 
