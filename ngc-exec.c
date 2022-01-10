@@ -460,6 +460,9 @@ static int ngc_exec_perform_motion (struct ngc_state *o, struct ngc_device *dev)
 		return 1;
 	}
 
+	if (o->G[NGC_G1] == 0)
+		o->G[NGC_G1] = o->prev->G[NGC_G1];
+
 	switch (o->G[NGC_G1]) {
 	case NGC_G0000:
 		return ngc_device_move (dev, abs, o->axis);
