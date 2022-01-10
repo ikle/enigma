@@ -77,6 +77,8 @@ enum ngc_cutter {
 enum ngc_conf {
 	NGC_CONF_RATE,
 	NGC_CONF_SPEED,
+	NGC_CONF_MAX_FORCE,	/* Spindle maximum force		*/
+	NGC_CONF_MAX_TORQUE,	/* Spindle maximim torque		*/
 };
 
 int ngc_device_mode	(struct ngc_device *o, int opt, int value);
@@ -106,12 +108,6 @@ int ngc_device_stop	(struct ngc_device *o, int opt);
  * 4.3.7 Spindle Functions
  */
 
-enum ngc_limit {
-	NGC_LIMIT_FORCE = 0,
-	NGC_LIMIT_TORQUE,
-};
-
-//int ngc_device_spindle_limit	(struct ngc_device *o, double limit, int type);
 //int ngc_device_spindle_orient	(struct ngc_device *o, double angle);
 
 /*
