@@ -19,7 +19,14 @@ void ngc_device_free (struct ngc_device *o);
 
 /*
  * 4.3.3 Representation
+ * 4.3.5 Machining Attributes
  */
+
+enum ngc_conf {
+	NGC_CONF_UNITS,
+	NGC_CONF_PLANE,
+	NGC_CONF_MODE,		/* Feed mode	*/
+};
 
 enum ngc_units {
 	NGC_UNITS_MM = 0,
@@ -32,9 +39,14 @@ enum ngc_plane {
 	NGC_PLANE_YZ,
 };
 
-int ngc_device_units		(struct ngc_device *o, int units);
+enum ngc_mode {
+	NGC_MODE_EXACT_PATH = 0,
+	NGC_MODE_EXACT_STOP,
+	NGC_MODE_CONTINUOUS,
+};
+
+int ngc_device_conf		(struct ngc_device *o, int opt, int value);
 int ngc_device_offset		(struct ngc_device *o, double *vec);
-int ngc_device_plane		(struct ngc_device *o, int plane);
 
 /*
  * 4.3.4 Free Space Motion
@@ -48,15 +60,7 @@ int ngc_device_move		(struct ngc_device *o, int abs, double *end);
  * 4.3.5 Machining Attributes
  */
 
-enum ngc_mode {
-	NGC_MODE_EXACT_PATH = 0,
-	NGC_MODE_EXACT_STOP,
-	NGC_MODE_CONTINUOUS,
-};
-
 int ngc_device_feed_rate	(struct ngc_device *o, double rate, int inv);
-int ngc_device_feed_mode	(struct ngc_device *o, int mode);
-//int ngc_device_feed_sync	(struct ngc_device *o, int on);
 
 /*
  * 4.3.6 Machining Functions
@@ -106,6 +110,7 @@ enum ngc_opt {
 	NGC_OPT_OVERRIDE_FEED	= 1 << 2,
 	NGC_OPT_OVERRIDE_SPEED	= 1 << 3,
 	NGC_OPT_RETRACT_BACK	= 1 << 4,
+	NGC_OPT_FEED_SYNC	= 1 << 5,
 };
 
 enum ngc_coolant {

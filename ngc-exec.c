@@ -156,13 +156,13 @@ int ngc_exec_set_active_plane (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G2]) {
 	case NGC_G0170:
-		return ngc_device_plane (dev, NGC_PLANE_XY);
+		return ngc_device_conf (dev, NGC_CONF_PLANE, NGC_PLANE_XY);
 
 	case NGC_G0180:
-		return ngc_device_plane (dev, NGC_PLANE_XZ);
+		return ngc_device_conf (dev, NGC_CONF_PLANE, NGC_PLANE_XZ);
 
 	case NGC_G0190:
-		return ngc_device_plane (dev, NGC_PLANE_YZ);
+		return ngc_device_conf (dev, NGC_CONF_PLANE, NGC_PLANE_YZ);
 	}
 
 	return 1;
@@ -175,10 +175,10 @@ static int ngc_exec_set_units (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G6]) {
 	case NGC_G0200:
-		return ngc_device_units (dev, NGC_UNITS_INCHES);
+		return ngc_device_conf (dev, NGC_CONF_UNITS, NGC_UNITS_INCHES);
 
 	case NGC_G0210:
-		return ngc_device_units (dev, NGC_UNITS_MM);
+		return ngc_device_conf (dev, NGC_CONF_UNITS, NGC_UNITS_MM);
 	}
 
 	return 1;
@@ -269,13 +269,13 @@ static int ngc_exec_set_path_mode (struct ngc_state *o, struct ngc_device *dev)
 {
 	switch (o->G[NGC_G13]) {
 	case NGC_G0610:
-		return ngc_device_feed_mode (dev, NGC_MODE_EXACT_PATH);
+		return ngc_device_conf (dev, NGC_CONF_MODE, NGC_MODE_EXACT_PATH);
 
 	case NGC_G0611:
-		return ngc_device_feed_mode (dev, NGC_MODE_EXACT_STOP);
+		return ngc_device_conf (dev, NGC_CONF_MODE, NGC_MODE_EXACT_STOP);
 
 	case NGC_G0640:
-		return ngc_device_feed_mode (dev, NGC_MODE_CONTINUOUS);
+		return ngc_device_conf (dev, NGC_CONF_MODE, NGC_MODE_CONTINUOUS);
 	}
 
 	return 1;
