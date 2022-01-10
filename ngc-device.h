@@ -77,6 +77,7 @@ enum ngc_cutter {
 enum ngc_conf {
 	NGC_CONF_RATE,
 	NGC_CONF_SPEED,
+	NGC_CONF_MAX_RATE,	/* Maximum traverse rate		*/
 	NGC_CONF_MAX_FORCE,	/* Spindle maximum force		*/
 	NGC_CONF_MAX_TORQUE,	/* Spindle maximim torque		*/
 };
@@ -89,7 +90,6 @@ int ngc_device_offset	(struct ngc_device *o, double *vec);
  * 4.3.4 Free Space Motion
  */
 
-//int ngc_device_traverse_rate	(struct ngc_device *o, double rate);
 int ngc_device_home	(struct ngc_device *o);
 int ngc_device_move	(struct ngc_device *o, int abs, double *end);
 
