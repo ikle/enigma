@@ -405,11 +405,11 @@ static int ngc_exec_conf_offset (struct ngc_state *o, struct ngc_device *dev)
 
 	case NGC_G0280:
 		return ngc_device_move (dev, 0, o->axis) &&
-		       ngc_device_home (dev);
+		       ngc_device_home (dev, 0);
 
 	case NGC_G0300:
 		return ngc_device_move (dev, 0, o->axis) &&
-		       ngc_device_move (dev, 0, o->var + NGC_WORK_X);
+		       ngc_device_home (dev, 1);
 
 	case NGC_G0920:
 		return ngc_exec_shift (o, dev);

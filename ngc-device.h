@@ -90,7 +90,7 @@ int ngc_device_offset	(struct ngc_device *o, double *vec);
  * 4.3.4 Free Space Motion
  */
 
-int ngc_device_home	(struct ngc_device *o);
+int ngc_device_home	(struct ngc_device *o, int index);
 int ngc_device_move	(struct ngc_device *o, int abs, double *end);
 
 /*
