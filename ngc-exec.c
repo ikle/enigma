@@ -75,8 +75,13 @@ int ngc_exec_set_spindle_speed (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_change_tool (struct ngc_state *o, struct ngc_device *dev)
 {
+	int slot = ngc_word (o, 'T');
+
+	if ((o->map & NGC_T) != 0)
+		return ngc_device_tool (dev, NGC_TOOL_SELECT, slot);
+
 	if (o->M[NGC_M6] == NGC_M0060)
-		return ngc_device_tool_change (dev, ngc_word (o, 'T'));
+		return ngc_device_tool (dev, NGC_TOOL_CHANGE, slot);
 
 	return 1;
 }
@@ -223,10 +228,10 @@ static int ngc_exec_conf_cutter_length_comp (struct ngc_state *o, struct ngc_dev
 
 	switch (o->G[NGC_G8]) {
 	case NGC_G0430:
-		return ngc_device_mode (dev, NGC_MODE_TOOL, slot);
+		return ngc_device_tool (dev, NGC_TOOL_COMP, slot);
 
 	case NGC_G0490:
-		return ngc_device_mode (dev, NGC_MODE_TOOL, 0);
+		return ngc_device_tool (dev, NGC_TOOL_COMP, 0);
 	}
 
 	return 1;

@@ -27,7 +27,6 @@ int ngc_device_reset	(struct ngc_device *o);
  * 4.3.3  Representation
  * 4.3.5  Machining Attributes
  * 4.3.7  Spindle Functions
- * 4.3.8  Tool Functions
  * 4.3.11 Cutter Radius Compensation
  */
 
@@ -37,7 +36,6 @@ enum ngc_mode {
 	NGC_MODE_PATH,		/* Path control mode			*/
 	NGC_MODE_RATE,		/* Feed rate mode			*/
 	NGC_MODE_SPINDLE,	/* Spindle rotation mode		*/
-	NGC_MODE_TOOL,		/* Tool number for tool length comp.	*/
 	NGC_MODE_CUTTER,	/* Cutter position			*/
 	NGC_MODE_CUTTER_NO,	/* Cutter number for compensation	*/
 };
@@ -120,7 +118,13 @@ enum ngc_limit {
  * 4.3.8 Tool Functions
  */
 
-int ngc_device_tool_change	(struct ngc_device *o, int slot);
+enum ngc_tool {
+	NGC_TOOL_SELECT,
+	NGC_TOOL_CHANGE,
+	NGC_TOOL_COMP,		/* Enable tool length compensation	*/
+};
+
+int ngc_device_tool	(struct ngc_device *o, int op, int slot);
 
 /*
  * 4.3.9 Miscellaneous Functions
