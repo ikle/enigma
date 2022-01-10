@@ -12,6 +12,7 @@
 
 #include <stddef.h>
 
+#include "ngc-device.h"
 #include "ngc-gcode.h"
 #include "ngc-mcode.h"
 #include "ngc-vars.h"
@@ -26,16 +27,27 @@ struct ngc_state {
 	int M[NGC_MGSIZE];
 	double word[26];
 	long map;		/* explicitly set words */
+
+	double axis[6];
 };
 
 int ngc_error (struct ngc_state *o, const char *fmt, ...);
 int ngc_warn  (struct ngc_state *o, const char *fmt, ...);
+
+int ngc_state_reset (struct ngc_state *o);
+
 int ngc_check (struct ngc_state *o);
-int ngc_exec  (struct ngc_state *o);
+int ngc_exec  (struct ngc_state *o, struct ngc_device *dev);
 
 /*
  * NGC State helpers
  */
+
+static inline int ngc_state_end (struct ngc_state *o)
+{
+	o->prev = NULL;
+	return 1;
+}
 
 static inline int ngc_is_inv_mode (struct ngc_state *o)
 {

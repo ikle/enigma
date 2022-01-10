@@ -175,17 +175,12 @@ enum ngc_var {
 	NGC_TOOL_BA	= 5412,	/* Tool back angle	(EMC2)	*/
 	NGC_TOOL_O	= 5413,	/* Tool orientation	(EMC2)	*/
 
+	NGC_REL,
 	NGC_INV,
 	NGC_COMP,
 	NGC_PLANE,
 
 	NGC_VSIZE,
-};
-
-enum ngc_plane {
-	NGC_PLANE_XY,
-	NGC_PLANE_XZ,
-	NGC_PLANE_YZ,
 };
 
 #endif  /* NGC_VARS_H */
