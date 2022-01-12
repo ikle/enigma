@@ -112,7 +112,7 @@ static int ngc_exec_conf_spindle (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_conf_coolant (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->M[NGC_M7]) {
+	switch (o->M[NGC_M8]) {
 	case NGC_M0070:
 		return ngc_device_coolant (dev, NGC_COOLANT_MIST, 1);
 

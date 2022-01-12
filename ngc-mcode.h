@@ -14,6 +14,7 @@ enum ngc_mgroup {
 	NGC_M4 = 0,
 	NGC_M6,
 	NGC_M7,
+	NGC_M8,
 	NGC_M9,
 
 	NGC_MGSIZE,
@@ -42,7 +43,7 @@ enum ngc_mcode {
 	NGC_M0050,	/* stop spindle turning				*/
 
 	/*
-	 * Modal M-code group 7: coolant
+	 * Modal M-code group 8: coolant
 	 *
 	 * Special case: M7 and M8 may be active at the same time
 	 */
