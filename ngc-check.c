@@ -1,7 +1,7 @@
 /*
  * NIST RS274/NGC G-Code Checker
  *
- * Copyright (c) 2021 Alexei A. Smekalkine
+ * Copyright (c) 2021-2022 Alexei A. Smekalkine
  *
  * Standard: NIST IR 6556
  * SPDX-License-Identifier: BSD-2-Clause
@@ -159,7 +159,7 @@ static int ngc_g0100_check (struct ngc_state *o)
 	if (!ngc_int_check (o, 'L', 0, 1000, "Subcommand"))
 		return 0;
 
-	if (o->G[1] != 0)
+	if (o->g[NGC_G1] != 0)
 		return ngc_error (o, "G10 cannot be used with any motion "
 				     "command");
 
@@ -198,7 +198,7 @@ static int ngc_g0210_check (struct ngc_state *o)
 
 static int ngc_g0280_check (struct ngc_state *o)
 {
-	if (o->G[1] != 0)
+	if (o->g[NGC_G1] != 0)
 		return ngc_error (o, "G28 cannot be used with any motion "
 				     "command");
 
@@ -207,7 +207,7 @@ static int ngc_g0280_check (struct ngc_state *o)
 
 static int ngc_g0300_check (struct ngc_state *o)
 {
-	if (o->G[1] != 0)
+	if (o->g[NGC_G1] != 0)
 		return ngc_error (o, "G30 cannot be used with any motion "
 				     "command");
 
@@ -281,7 +281,7 @@ static int ngc_g0490_check (struct ngc_state *o)
 
 static int ngc_g0530_check (struct ngc_state *o)
 {
-	if (o->G[1] != NGC_G0000 && o->G[1] != NGC_G0010)
+	if (o->g[NGC_G1] != NGC_G0000 && o->g[NGC_G1] != NGC_G0010)
 		return ngc_error (o, "G53 is used without G0 or G1 being "
 				     "active");
 	if (ngc_is_comp_mode (o))
@@ -360,8 +360,8 @@ static int ngc_g0640_check (struct ngc_state *o)
 
 static int ngc_g0800_check (struct ngc_state *o)
 {
-	int g0_axis = o->G[0] == NGC_G0100 || o->G[0] == NGC_G0280 ||
-		      o->G[0] == NGC_G0300 || o->G[0] == NGC_G0920;
+	int g0_axis = o->g[NGC_G0] == NGC_G0100 || o->g[NGC_G0] == NGC_G0280 ||
+		      o->g[NGC_G0] == NGC_G0300 || o->g[NGC_G0] == NGC_G0920;
 
 	if (!g0_axis && (o->map & NGC_AXIS) != 0)
 		ngc_warn (o, "Useless axis word specified for G80");
@@ -380,7 +380,7 @@ static int ngc_canned_check (struct ngc_state *o, const char *cmd)
 
 	switch ((int) o->var[NGC_PLANE]) {
 	case NGC_PLANE_XY:
-		if ((o->map & NGC_Z) == 0 && o->G[1] != o->prev->G[1])
+		if ((o->map & NGC_Z) == 0 && o->g[NGC_G1] != o->prev->g[NGC_G1])
 			return ngc_error (o, "No Z word for first %s", cmd);
 
 		if (ngc_word (o, 'R') < ngc_word (o, 'Z'))
@@ -388,7 +388,7 @@ static int ngc_canned_check (struct ngc_state *o, const char *cmd)
 					     "plane for %s", cmd);
 		break;
 	case NGC_PLANE_XZ:
-		if ((o->map & NGC_Y) == 0 && o->G[1] != o->prev->G[1])
+		if ((o->map & NGC_Y) == 0 && o->g[NGC_G1] != o->prev->g[NGC_G1])
 			return ngc_error (o, "No Y word for first %s", cmd);
 
 		if (ngc_word (o, 'R') < ngc_word (o, 'Y'))
@@ -396,7 +396,7 @@ static int ngc_canned_check (struct ngc_state *o, const char *cmd)
 					     "plane for %s", cmd);
 		break;
 	case NGC_PLANE_YZ:
-		if ((o->map & NGC_X) == 0 && o->G[1] != o->prev->G[1])
+		if ((o->map & NGC_X) == 0 && o->g[NGC_G1] != o->prev->g[NGC_G1])
 			return ngc_error (o, "No X word for first %s", cmd);
 
 		if (ngc_word (o, 'R') < ngc_word (o, 'X'))
@@ -479,7 +479,7 @@ static int ngc_g0910_check (struct ngc_state *o)
 
 static int ngc_g0920_check (struct ngc_state *o)
 {
-	if (o->G[1] != 0)
+	if (o->g[NGC_G1] != 0)
 		return ngc_error (o, "G92 cannot be used with any motion "
 				     "command");
 
@@ -585,8 +585,8 @@ int ngc_check (struct ngc_state *o)
 {
 	int i;
 
-	for (i = 0; i < NGC_GGSIZE; ++i)
-		if (o->G[i] != 0 && !ngc_check_gcode (o, o->G[i]))
+	for (i = 0; i <= NGC_G13; ++i)
+		if (o->g[i] != 0 && !ngc_check_gcode (o, o->g[i]))
 			return 0;
 
 	return 1;

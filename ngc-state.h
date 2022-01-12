@@ -1,7 +1,7 @@
 /*
  * NIST RS274/NGC State
  *
- * Copyright (c) 2021 Alexei A. Smekalkine
+ * Copyright (c) 2021-2022 Alexei A. Smekalkine
  *
  * Standard: NIST IR 6556
  * SPDX-License-Identifier: BSD-2-Clause
@@ -12,9 +12,8 @@
 
 #include <stddef.h>
 
+#include "ngc-code.h"
 #include "ngc-device.h"
-#include "ngc-gcode.h"
-#include "ngc-mcode.h"
 #include "ngc-vars.h"
 #include "ngc-word.h"
 
@@ -23,8 +22,7 @@ struct ngc_state {
 	double *var;
 	const char *comment;
 
-	int G[NGC_GGSIZE];
-	int M[NGC_MGSIZE];
+	int g[NGC_GSIZE];
 	double word[26];
 	long map;		/* explicitly set words */
 

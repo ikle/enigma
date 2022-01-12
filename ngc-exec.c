@@ -1,7 +1,7 @@
 /*
  * NIST RS274/NGC Executer
  *
- * Copyright (c) 2021 Alexei A. Smekalkine
+ * Copyright (c) 2021-2022 Alexei A. Smekalkine
  *
  * Standard: NIST IR 6556
  * SPDX-License-Identifier: BSD-2-Clause
@@ -33,7 +33,7 @@ static int ngc_exec_comment (struct ngc_state *o, struct ngc_device *dev)
 static
 int ngc_exec_set_feed_rate_mode (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->G[NGC_G5]) {
+	switch (o->g[NGC_G5]) {
 	case NGC_G0930:
 		o->var[NGC_INV] = 1;
 		return ngc_device_mode (dev, NGC_MODE_RATE, NGC_RATE_CPM);
@@ -80,7 +80,7 @@ static int ngc_exec_change_tool (struct ngc_state *o, struct ngc_device *dev)
 	if ((o->map & NGC_T) != 0)
 		return ngc_device_tool (dev, NGC_TOOL_SELECT, slot);
 
-	if (o->M[NGC_M6] == NGC_M0060)
+	if (o->g[NGC_M6] == NGC_M0060)
 		return ngc_device_tool (dev, NGC_TOOL_CHANGE, slot);
 
 	return 1;
@@ -93,7 +93,7 @@ static int ngc_exec_conf_spindle (struct ngc_state *o, struct ngc_device *dev)
 {
 	double speed = ngc_word (o, 'S');
 
-	switch (o->M[NGC_M7]) {
+	switch (o->g[NGC_M7]) {
 	case NGC_M0030:
 		return ngc_device_spindle (dev, NGC_SPINDLE_CW, speed);
 
@@ -112,7 +112,7 @@ static int ngc_exec_conf_spindle (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_conf_coolant (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->M[NGC_M8]) {
+	switch (o->g[NGC_M8]) {
 	case NGC_M0070:
 		return ngc_device_coolant (dev, NGC_COOLANT_MIST, 1);
 
@@ -133,7 +133,7 @@ static int ngc_exec_conf_overrides (struct ngc_state *o, struct ngc_device *dev)
 {
 	int mask = NGC_OPT_OVERRIDE_FEED | NGC_OPT_OVERRIDE_SPEED;
 
-	switch (o->M[NGC_M9]) {
+	switch (o->g[NGC_M9]) {
 	case NGC_M0480:
 		return ngc_device_opt (dev, mask, 1);
 
@@ -149,7 +149,7 @@ static int ngc_exec_conf_overrides (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_dwell (struct ngc_state *o, struct ngc_device *dev)
 {
-	if (o->G[NGC_G0] == NGC_G0040)
+	if (o->g[NGC_G0] == NGC_G0040)
 		return ngc_device_dwell (dev, ngc_word (o, 'P'));
 
 	return 1;
@@ -161,7 +161,7 @@ static int ngc_exec_dwell (struct ngc_state *o, struct ngc_device *dev)
 static
 int ngc_exec_set_active_plane (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->G[NGC_G2]) {
+	switch (o->g[NGC_G2]) {
 	case NGC_G0170:
 		return ngc_device_mode (dev, NGC_MODE_PLANE, NGC_PLANE_XY);
 
@@ -180,7 +180,7 @@ int ngc_exec_set_active_plane (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_set_units (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->G[NGC_G6]) {
+	switch (o->g[NGC_G6]) {
 	case NGC_G0200:
 		return ngc_device_mode (dev, NGC_MODE_UNITS, NGC_UNITS_INCHES);
 
@@ -199,7 +199,7 @@ ngc_exec_conf_cutter_radius_comp (struct ngc_state *o, struct ngc_device *dev)
 {
 	int slot = (o->map & NGC_D) != 0 ? ngc_word (o, 'D') : 0 /* current */;
 
-	switch (o->G[NGC_G7]) {
+	switch (o->g[NGC_G7]) {
 	case NGC_G0400:
 		return ngc_device_cutter (dev, NGC_CUTTER_C, -1);  /* off */
 
@@ -224,7 +224,7 @@ static int ngc_exec_conf_cutter_length_comp (struct ngc_state *o, struct ngc_dev
 	 * NOTE: Incompatibility with NGC v3 for D0 meaning in line with EMC2
 	 */
 
-	switch (o->G[NGC_G8]) {
+	switch (o->g[NGC_G8]) {
 	case NGC_G0430:
 		return ngc_device_tool (dev, NGC_TOOL_COMP, slot);
 
@@ -259,7 +259,7 @@ int ngc_exec_select_coord_system (struct ngc_state *o, struct ngc_device *dev)
 {
 	int cs;
 
-	switch (o->G[NGC_G12]) {
+	switch (o->g[NGC_G12]) {
 	case NGC_G0540:		cs = 1; break;
 	case NGC_G0550:		cs = 2; break;
 	case NGC_G0560:		cs = 3; break;
@@ -281,7 +281,7 @@ int ngc_exec_select_coord_system (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_set_path_mode (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->G[NGC_G13]) {
+	switch (o->g[NGC_G13]) {
 	case NGC_G0610:
 		return ngc_device_mode (dev, NGC_MODE_PATH, NGC_PATH_EXACT);
 
@@ -301,7 +301,7 @@ static int ngc_exec_set_path_mode (struct ngc_state *o, struct ngc_device *dev)
 static
 int ngc_exec_set_distance_mode (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->G[NGC_G3]) {
+	switch (o->g[NGC_G3]) {
 	case NGC_G0900:
 		o->var[NGC_REL] = 0;
 		return ngc_device_opt (dev, NGC_OPT_RELATIVE, 0);
@@ -320,7 +320,7 @@ int ngc_exec_set_distance_mode (struct ngc_state *o, struct ngc_device *dev)
 static
 int ngc_exec_set_retract_mode (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->G[NGC_G10]) {
+	switch (o->g[NGC_G10]) {
 	case NGC_G0980:
 		return ngc_device_opt (dev, NGC_OPT_RETRACT_BACK, 1);
 
@@ -392,7 +392,7 @@ static int ngc_exec_conf_offset (struct ngc_state *o, struct ngc_device *dev)
 
 	ngc_axis_prepare (o);
 
-	switch (o->G[NGC_G0]) {
+	switch (o->g[NGC_G0]) {
 	case NGC_G0100:
 		if (ngc_word (o, 'L') == 2) {
 			cs = ngc_word (o, 'P');
@@ -449,17 +449,17 @@ static int ngc_exec_arc (struct ngc_state *o, struct ngc_device *dev, int cw)
 
 static int ngc_exec_perform_motion (struct ngc_state *o, struct ngc_device *dev)
 {
-	int abs = o->G[NGC_G0] == NGC_G0530;
+	int abs = o->g[NGC_G0] == NGC_G0530;
 
-	switch (o->G[NGC_G0]) {
+	switch (o->g[NGC_G0]) {
 	case NGC_G0100: case NGC_G0280: case NGC_G0300: case NGC_G0920:
 		return 1;
 	}
 
-	if (o->G[NGC_G1] == 0)
-		o->G[NGC_G1] = o->prev->G[NGC_G1];
+	if (o->g[NGC_G1] == 0)
+		o->g[NGC_G1] = o->prev->g[NGC_G1];
 
-	switch (o->G[NGC_G1]) {
+	switch (o->g[NGC_G1]) {
 	case NGC_G0000:
 		return ngc_device_move (dev, abs, o->axis);
 
@@ -484,7 +484,7 @@ static int ngc_exec_perform_motion (struct ngc_state *o, struct ngc_device *dev)
  */
 static int ngc_exec_stop (struct ngc_state *o, struct ngc_device *dev)
 {
-	switch (o->M[NGC_M4]) {
+	switch (o->g[NGC_M4]) {
 	case NGC_M0000:
 		return ngc_device_stop (dev, 0);
 

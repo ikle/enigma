@@ -1,7 +1,7 @@
 /*
  * NIST RS274/NGC M-Codes
  *
- * Copyright (c) 2021 Alexei A. Smekalkine
+ * Copyright (c) 2021-2022 Alexei A. Smekalkine
  *
  * Standard: NIST IR 6556
  * SPDX-License-Identifier: BSD-2-Clause
@@ -9,16 +9,6 @@
 
 #ifndef NGC_MCODE_H
 #define NGC_MCODE_H  1
-
-enum ngc_mgroup {
-	NGC_M4 = 0,
-	NGC_M6,
-	NGC_M7,
-	NGC_M8,
-	NGC_M9,
-
-	NGC_MGSIZE,
-};
 
 enum ngc_mcode {
 	/*
@@ -56,8 +46,6 @@ enum ngc_mcode {
 	 */
 	NGC_M0480,	/* enable speed and feed overrides		*/
 	NGC_M0490,	/* disable speed and feed overrides		*/
-
-	NGC_MSIZE,
 };
 
 #endif  /* NGC_MCODE_H */

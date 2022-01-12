@@ -1,7 +1,7 @@
 /*
  * NIST RS274/NGC G-Codes
  *
- * Copyright (c) 2021 Alexei A. Smekalkine
+ * Copyright (c) 2021-2022 Alexei A. Smekalkine
  *
  * Standard: NIST IR 6556
  * SPDX-License-Identifier: BSD-2-Clause
@@ -9,22 +9,6 @@
 
 #ifndef NGC_GCODE_H
 #define NGC_GCODE_H  1
-
-enum ngc_ggroup {
-	NGC_G0 = 0,
-	NGC_G1,
-	NGC_G2,
-	NGC_G3,
-	NGC_G5,
-	NGC_G6,
-	NGC_G7,
-	NGC_G8,
-	NGC_G10,
-	NGC_G12,
-	NGC_G13,
-
-	NGC_GGSIZE,
-};
 
 enum ngc_gcode {
 	/*
@@ -122,8 +106,6 @@ enum ngc_gcode {
 	NGC_G0610,	/* set path control mode: exact path		*/
 	NGC_G0611,	/* set path control mode: exact stop		*/
 	NGC_G0640,	/* set path control mode: continuous		*/
-
-	NGC_GSIZE,
 };
 
 #endif  /* NGC_GCODE_H */
