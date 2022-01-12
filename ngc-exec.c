@@ -221,7 +221,7 @@ static int ngc_exec_conf_cutter_length_comp (struct ngc_state *o, struct ngc_dev
 	int slot = (o->map & NGC_H) != 0 ? ngc_word (o, 'H') : 0 /* current */;
 
 	/*
-	 * NOTE: Incompatibility with NGC v3 for D0 meaning in line with EMC2
+	 * NOTE: Incompatibility with NGC3 for H0 meaning in line with EMC2
 	 */
 
 	switch (o->g[NGC_G8]) {
